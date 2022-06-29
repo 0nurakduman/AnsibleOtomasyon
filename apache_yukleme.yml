@@ -4,7 +4,6 @@
     become: true
     tasks:
 
-# Bu görevler, Debian & Ubuntu tabanlı sunucular içndir.
     - name: Bu gorev, Ubuntu packet index'ini günceller.
       apt:
         update_cache: yes
