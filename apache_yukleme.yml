@@ -1,9 +1,23 @@
----   
+---
 
   - hosts: all
-    become: true 
+    become: true
     tasks:
 
-    -name: Bu gorev, apache2 yuklemesini gerceklestirir.
-     apt:
-       name: apache2 
+# Bu görevler, Debian & Ubuntu tabanlı sunucular içndir.
+    - name: Bu gorev, Ubuntu packet index'ini günceller.
+      apt:
+        update_cache: yes
+      when: ansible_distribution == "Ubuntu"
+    
+    - name: Bu gorev, Ubuntu apache2 yuklememesini gerceklestirir.
+      apt:
+        name: apache2
+        state: latest
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Bu gorev, Ubuntu apache icin php kutuphanesini yuklememesini gerceklestirir.
+      apt:
+        name: libapache2-mod-php
+        state: latest
+      when: ansible_distribution == "Ubuntu"
