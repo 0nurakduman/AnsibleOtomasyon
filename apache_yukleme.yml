@@ -4,6 +4,7 @@
     become: true
     tasks:
 
+# Bu görevler, Debian & Ubuntu tabanlı sunucular içndir.
     - name: Bu gorev, Ubuntu packet index'ini günceller.
       apt:
         update_cache: yes
@@ -20,3 +21,22 @@
         name: libapache2-mod-php
         state: latest
       when: ansible_distribution == "Ubuntu"
+
+# Bu görevler, Redhat  & Rocky tabanlı sunucular içndir.      
+
+    - name: Bu gorev, Rocky Linux update index'ini günceller.
+      dnf:
+        update_cache: yes
+      when: ansible_distribution == "Rocky"
+    
+    - name: Bu gorev, Rocky Web sunucu yuklememesini gerceklestirir.
+      dnf:
+        name: httpd
+        state: latest
+      when: ansible_distribution == "Rocky"
+
+    - name: Bu gorev, Rocky Linux'a apache icin php kutuphanesini yuklememesini gerceklestirir.
+      dnf:
+        name: php
+        state: latest
+      when: ansible_distribution == "Rocky"
