@@ -1,5 +1,5 @@
 ---
-  - hosts: web_sunuculari
+  - hosts: all
     become: true
     tasks:
 
@@ -10,4 +10,3 @@
           - libapache2-mod-php
         state: absent
       when: ansible_distribution == "Ubuntu"
-
