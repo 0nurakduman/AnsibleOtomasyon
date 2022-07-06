@@ -17,11 +17,11 @@
     become: true
     tasks:
 
-      - name: İsletim sistemlerini tespit et.
+      - name: Isletim sistemlerini tespit et.
         debug: var=ansible_os_family
         tags: web_sunuculari
       
-      - name: Dosyalardan Degiskenleri oku.
+      - name: Dosyalardan degiskenleri oku.
         include_vars: "{{ lookup('first_found', params) }}"
         vars: 
           params:
@@ -30,7 +30,7 @@
               - "vars/apache_varsayilan.yml"
         tags: web_sunuculari
 
-      - name: Bu gorev, Ubuntu Apache & Php Kutuphane yuklemesi ile birlikte packet index'ini günceller.
+      - name: Bu gorev, Ubuntu Apache & Php kutuphane yuklemesi ile birlikte packet index'ini günceller.
         ansible.builtin.package:
             name:
               - "{{ apache_sunucusu }}"
@@ -43,11 +43,11 @@
     become: true
     tasks:
 
-      - name: İsletim sistemlerini tespit et.
+      - name: Isletim sistemlerini tespit et.
         debug: var=ansible_os_family
         tags: veritabani_sunucusu
       
-      - name: Dosyalardan Degiskenleri oku.
+      - name: Dosyalardan degiskenleri oku.
         include_vars: "{{ lookup('first_found', params) }}"
         vars: 
           params:
@@ -56,7 +56,7 @@
               - "vars/apache_varsayilan.yml"
         tags: veritabani_sunucusu
 
-      - name: Bu gorev, Ubuntu Suncusuna Mariadb Yuklemesini gerceklestirir.
+      - name: Bu gorev, Ubuntu Suncusuna Mariadb yuklemesini gerceklestirir.
         ansible.builtin.package:
             name:
               - "{{ db_sunucusu }}"
@@ -68,11 +68,11 @@
     become: true
     tasks:
 
-      - name: İsletim sistemlerini tespit et.
+      - name: Isletim sistemlerini tespit et.
         debug: var=ansible_os_family
         tags: ftp_sunucusu
       
-      - name: Dosyalardan Degiskenleri oku.
+      - name: Dosyalardan degiskenleri oku.
         include_vars: "{{ lookup('first_found', params) }}"
         vars: 
           params:
@@ -81,7 +81,7 @@
               - "vars/apache_varsayilan.yml"
         tags: ftp_sunucusu
 
-      - name: Bu gorev, Ubuntu Suncusuna FTP Yuklemesini gerceklestirir.
+      - name: Bu gorev, Ubuntu Suncusuna FTP yuklemesini gerceklestirir.
         ansible.builtin.package:
             name:
               - "{{ ftp_sunucusu }}"
