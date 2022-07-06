@@ -6,22 +6,22 @@
     tasks:
 
 # Bu görev, Sunucu güncellemeleri için hazırlanmıştır..
-    - name: Bu gorev, Ubuntu Linux Update & Upgrade islemlerini gerçekleştirir
+    - name: Bu gorev, Ubuntu Linux Update & Upgrade islemlerini gerceklestirir
       ansible.builtin.package:
           upgrade: dist
           update_cache: yes
       when: ansible_distribution == "Ubuntu"
 
-# Bu gorev, Ubuntu & Rocky Linux için Apache & Php kutuphane yüklemesinini gerçekleştirir.
+# Bu gorev, Ubuntu & Rocky Linux için Apache & Php kutuphane yüklemesinini gerceklestirir.
   - hosts: web_sunuculari
     become: true
     tasks:
 
-      - name: İşletim sistemlerini tespit et.
+      - name: İsletim sistemlerini tespit et.
         debug: var=ansible_os_family
         tags: web_sunuculari
       
-      - name: Dosyalardan Değişkenleri oku.
+      - name: Dosyalardan Degiskenleri oku.
         include_vars: "{{ lookup('first_found', params) }}"
         vars: 
           params:
@@ -30,7 +30,7 @@
               - "vars/apache_varsayilan.yml"
         tags: web_sunuculari
 
-      - name: Bu gorev, Ubuntu Apache & Php Kutuphane yuklemsi ile birlikte packet index'ini günceller.
+      - name: Bu gorev, Ubuntu Apache & Php Kutuphane yuklemesi ile birlikte packet index'ini günceller.
         ansible.builtin.package:
             name:
               - "{{ apache_sunucusu }}"
@@ -38,16 +38,16 @@
             state: latest
         tags: web_sunuculari
 
-# Bu gorev, Ubuntu Sunucusuna Mariadb yüklemesinini gerçekleştirir.
+# Bu gorev, Ubuntu Sunucusuna Mariadb yüklemesinini gerceklestirir.
   - hosts: veritabani_sunucusu
     become: true
     tasks:
 
-      - name: İşletim sistemlerini tespit et.
+      - name: İsletim sistemlerini tespit et.
         debug: var=ansible_os_family
         tags: veritabani_sunucusu
       
-      - name: Dosyalardan Değişkenleri oku.
+      - name: Dosyalardan Degiskenleri oku.
         include_vars: "{{ lookup('first_found', params) }}"
         vars: 
           params:
@@ -56,23 +56,23 @@
               - "vars/apache_varsayilan.yml"
         tags: veritabani_sunucusu
 
-      - name: Bu gorev, Ubuntu Suncusuna Mariadb Yüklemesini gerçekleştirir.
+      - name: Bu gorev, Ubuntu Suncusuna Mariadb Yuklemesini gerceklestirir.
         ansible.builtin.package:
             name:
               - "{{ db_sunucusu }}"
             state: latest
         tags: veritabani_sunucusu
 
-# Bu gorev, Ubuntu Sunucusuna Mariadb yüklemesinini gerçekleştirir.
+# Bu gorev, Ubuntu Sunucusuna Mariadb yüklemesinini gerceklestirir.
   - hosts: ftp_sunucusu
     become: true
     tasks:
 
-      - name: İşletim sistemlerini tespit et.
+      - name: İsletim sistemlerini tespit et.
         debug: var=ansible_os_family
         tags: ftp_sunucusu
       
-      - name: Dosyalardan Değişkenleri oku.
+      - name: Dosyalardan Degiskenleri oku.
         include_vars: "{{ lookup('first_found', params) }}"
         vars: 
           params:
@@ -81,7 +81,7 @@
               - "vars/apache_varsayilan.yml"
         tags: ftp_sunucusu
 
-      - name: Bu gorev, Ubuntu Suncusuna FTP Yüklemesini gerçekleştirir.
+      - name: Bu gorev, Ubuntu Suncusuna FTP Yuklemesini gerceklestirir.
         ansible.builtin.package:
             name:
               - "{{ ftp_sunucusu }}"
