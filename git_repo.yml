@@ -1,7 +1,7 @@
 - hosts: Ansible_Controller
   connection: local
   vars: 
-    - repo: 'https://github.com/techakademi/Yenisite.git'
+    - repo: 'https://github.com/0nurakduman/Yenisite.git'
     - hedefklasor: /home/theadmin/Prod_Proje
   become: yes
     
