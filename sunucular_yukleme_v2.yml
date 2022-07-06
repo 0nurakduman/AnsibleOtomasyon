@@ -6,7 +6,7 @@
     tasks:
 
 # Bu görev, Sunucu güncellemeleri için hazırlanmıştır..
-    - name: Bu gorev, Ubuntu Linux Update & Upgrade işlemlerini gerçekleştirir
+    - name: Bu gorev, Ubuntu Linux Update & Upgrade islemlerini gerçekleştirir
       ansible.builtin.package:
           upgrade: dist
           update_cache: yes
