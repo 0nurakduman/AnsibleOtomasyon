@@ -30,7 +30,7 @@
               - "vars/apache_varsayilan.yml"
         tags: web_sunuculari
 
-      - name: Bu gorev, Ubuntu Apache & Php kutuphane yuklemesi ile birlikte packet index'ini günceller.
+      - name: Bu gorev, Ubuntu Apache & Php kutuphane yuklemesi ile birlikte packet index'ini gunceller.
         ansible.builtin.package:
             name:
               - "{{ apache_sunucusu }}"
