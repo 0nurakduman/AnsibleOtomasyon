@@ -47,7 +47,7 @@
       
       - name: Bu gorev, Web sunuculuarına, varsayılan html sayfasını kopyalama işlemini gerçekleştirir.
         copy:
-          src: ~/Dev_Proje/index.html
+          src: ~/INP112_OnurAkduman/index.html
           dest: /var/www/html/index.html
           owner: root
           group: root
