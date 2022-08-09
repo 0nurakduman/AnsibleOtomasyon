@@ -1,26 +1,27 @@
 ---
-- hosts: Ansible_Controller
-  connection: local
-  vars: 
-    - repo: 'https://github.com/0nurakduman/Yenisite.git'
-    - hedefklasor: /home/theadmin/Prod_Proje
-  become: yes
+  - hosts: Ansible_Controller
+    connection: local
+    vars: 
+      - repo: 'https://github.com/0nurakduman/Yenisite.git'
+      - hedefklasor: /home/theadmin/Prod_Proje
+    become: yes
+      
+    tasks:
     
-  tasks:
-  
-    - name: Bu görev, GitRepo'dan projenin kaynak kodlarını indirme işlemini gerçekleştirir.
-      git:
-        repo: "{{ repo }}"
-        dest: "{{ hedefklasor }}"
-    
+      - name: Bu görev, GitRepo'dan projenin kaynak kodlarını indirme işlemini gerçekleştirir.
+        git:
+          repo: "{{ repo }}"
+          dest: "{{ hedefklasor }}"
+      
 
-    - name: Bu görev, GitRepo'dan indirilen proje belgelerini kontrol işlemini gerçekleştirir.
-      find:
-        paths: "{{ hedefklasor }}"      
-      register: liste
+      - name: Bu görev, GitRepo'dan indirilen proje belgelerini kontrol işlemini gerçekleştirir.
+        find:
+          paths: "{{ hedefklasor }}"      
+        register: liste
 
-    - debug:
-        var: liste
+      - debug:
+          var: liste
+
 
   - hosts: all
     #tags: always
@@ -63,7 +64,7 @@
       
       - name: Bu gorev, Web sunuculuarına, varsayılan html sayfasını kopyalama işlemini gerçekleştirir.
         copy:
-          src: ~Prod_Proje/index.html
+          src: /home/theadmin/Prod_Proje/index.html
           dest: /var/www/html/index.html
           owner: root
           group: root
@@ -120,3 +121,9 @@
               - "{{ ftp_sunucusu }}"
             state: latest
         tags: ftp_sunucusu
+        
+    handlers:
+    - name: restart-apache
+      service:
+        name: apache2
+        state: restarted
