@@ -1,4 +1,5 @@
 ---
+
   - hosts: Ansible_Controller
     connection: local
     vars: 
@@ -121,9 +122,12 @@
               - "{{ ftp_sunucusu }}"
             state: latest
         tags: ftp_sunucusu
-        
-    handlers:
-    - name: restart-apache
-      service:
-        name: apache2
-        state: restarted
+
+  - hosts: all
+    become: true
+    tasks:
+      - name: Restart apache2 service
+        service:
+          name: apache2
+          state: restarted
+  
