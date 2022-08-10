@@ -72,57 +72,6 @@
           mode: 0644
         tags: web_sunuculari
 
-        
-# Bu gorev, Ubuntu Sunucusuna Mariadb yüklemesinini gerçekleştirir.
-  - hosts: veritabani_sunucusu
-    become: true
-    tasks:
-
-      - name: İşletim sistemlerini tespit et.
-        debug: var=ansible_os_family
-        tags: veritabani_sunucusu
-      
-      - name: Dosyalardan Değişkenleri oku.
-        include_vars: "{{ lookup('first_found', params) }}"
-        vars: 
-          params:
-            files:
-              - "vars/apache_{{ ansible_os_family }}.yml"
-              - "vars/apache_varsayilan.yml"
-        tags: veritabani_sunucusu
-
-      - name: Bu gorev, Ubuntu Suncusuna Mariadb Yüklemesini gerçekleştirir.
-        ansible.builtin.package:
-            name:
-              - "{{ db_sunucusu }}"
-            state: latest
-        tags: veritabani_sunucusu
-
-# Bu gorev, Ubuntu Sunucusuna Mariadb yüklemesinini gerçekleştirir.
-  - hosts: ftp_sunucusu
-    become: true
-    tasks:
-
-      - name: İşletim sistemlerini tespit et.
-        debug: var=ansible_os_family
-        tags: ftp_sunucusu
-      
-      - name: Dosyalardan Değişkenleri oku.
-        include_vars: "{{ lookup('first_found', params) }}"
-        vars: 
-          params:
-            files:
-              - "vars/apache_{{ ansible_os_family }}.yml"
-              - "vars/apache_varsayilan.yml"
-        tags: ftp_sunucusu
-
-      - name: Bu gorev, Ubuntu Suncusuna FTP Yüklemesini gerçekleştirir.
-        ansible.builtin.package:
-            name:
-              - "{{ ftp_sunucusu }}"
-            state: latest
-        tags: ftp_sunucusu
-
   - hosts: all
     become: true
     tasks:
